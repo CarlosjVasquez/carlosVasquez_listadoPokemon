@@ -1,0 +1,67 @@
+<card
+  class="card"
+  [urlimg]="
+    pokemon?.detailPokemon?.sprites?.other?.dream_world?.front_default || ''
+  "
+  [color]="pokemon?.speciesPokemon?.color?.name || ''"
+>
+  <div class="body" body>
+    <div class="title">
+      <h5>#{{ pokemon?.detailPokemon?.id }}</h5>
+      <h5>{{ pokemon?.name | titlecase }}</h5>
+    </div>
+    <div class="detail">
+      <div class="info-detail">
+        <h5>Types</h5>
+        <p>
+          <span *ngFor="let item of pokemon?.detailPokemon?.types"
+            >{{ item.type.name }}
+          </span>
+        </p>
+      </div>
+      <div class="info-detail">
+        <h5>Peso</h5>
+        <p>
+          {{ pokemon?.detailPokemon?.weight }}
+        </p>
+      </div>
+      <div class="info-detail">
+        <h5>Sprites</h5>
+        <div class="pictures-detail">
+          <picture>
+            <img
+              [src]="pokemon?.detailPokemon?.sprites?.front_default"
+              alt="front"
+            />
+          </picture>
+          <picture>
+            <img
+              [src]="pokemon?.detailPokemon?.sprites?.back_default"
+              alt="back"
+            />
+          </picture>
+          <picture>
+            <img
+              [src]="pokemon?.detailPokemon?.sprites?.front_shiny"
+              alt="front_shiny"
+            />
+          </picture>
+          <picture>
+            <img
+              [src]="pokemon?.detailPokemon?.sprites?.back_shiny"
+              alt="back_shiny"
+            />
+          </picture>
+        </div>
+      </div>
+      <div class="info-detail">
+        <h5>Movimientos</h5>
+        <p>
+          <span *ngFor="let item of pokemon?.detailPokemon?.moves"
+            >{{ item.move.name }}
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</card>

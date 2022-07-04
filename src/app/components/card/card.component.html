@@ -1,0 +1,10 @@
+<div class="card" [ngClass]="[color]">
+  <div class="card-header">
+    <picture>
+      <img class="img" [src]="urlimg" alt="picture" />
+    </picture>
+  </div>
+  <div class="card-body">
+    <ng-content select="[body]"></ng-content>
+  </div>
+</div>
