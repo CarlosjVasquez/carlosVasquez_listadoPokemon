@@ -70,8 +70,7 @@
               "browserTarget": "carlosvasquez-listadopokemon:build:production"
             },
             "development": {
-              "browserTarget": "carlosvasquez-listadopokemon:build:development",
-              "proxyConfig": "src/proxy.conf.json"
+              "browserTarget": "carlosvasquez-listadopokemon:build:development"
             }
           },
           "defaultConfiguration": "development"

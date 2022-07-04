@@ -4,9 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: '/api/v2/',
   ITEMS_BY_PAGE: 10,
-  // API_URL: 'https://pokeapi.co/api/v2/',
+  API_URL: 'https://pokeapi.co/api/v2/',
 };
 
 /*
