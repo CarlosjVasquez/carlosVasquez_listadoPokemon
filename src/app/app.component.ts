@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiPokemonService } from './services/api-pokemon.service';
 import {
   GetPokemonResult,
   Pokemon,
@@ -7,6 +6,7 @@ import {
   SpeciesPokemon,
 } from './model/pokemon';
 import { environment } from 'src/environments/environment';
+import { PokeapiService } from './services/pokeapi.service';
 
 @Component({
   selector: 'app-root',
@@ -21,8 +21,9 @@ export class AppComponent implements OnInit {
   selectedPokemon: Pokemon | null = null;
   disabledNext: boolean = true;
   disabledBack: boolean = true;
+  loading: boolean = false;
 
-  constructor(private apiPokemonServices: ApiPokemonService) {}
+  constructor(private apiPokemonServices: PokeapiService) {}
 
   ngOnInit() {
     this.searchPokemons();
@@ -31,16 +32,14 @@ export class AppComponent implements OnInit {
   async searchPokemons() {
     this.pokemons = [];
     this.selectedPokemon = null;
+    this.loading = true;
+    this.disabledNext = true;
+    this.disabledBack = true;
     try {
       const getPokemons: GetPokemonResult = await this.apiPokemonServices
         .getPokemons(this.limit.toString(), this.offset.toString())
         .toPromise();
       const listPokemons: Pokemon[] = [];
-
-      if (getPokemons.next) this.disabledNext = false;
-      else this.disabledNext = true;
-      if (getPokemons.previous) this.disabledBack = false;
-      else this.disabledBack = true;
 
       for await (const pokemon of getPokemons.results) {
         const urlPokemon = pokemon.url as string;
@@ -65,12 +64,18 @@ export class AppComponent implements OnInit {
       }
 
       this.pokemons = listPokemons;
+      if (getPokemons.next) this.disabledNext = false;
+      else this.disabledNext = true;
+      if (getPokemons.previous) this.disabledBack = false;
+      else this.disabledBack = true;
     } catch (error) {
       console.log(error);
     }
+    this.loading = false;
   }
 
   async searchPokemon(value: string) {
+    this.loading = true;
     this.pokemons = [];
     this.selectedPokemon = null;
     this.disabledNext = true;
@@ -78,9 +83,9 @@ export class AppComponent implements OnInit {
     if (value.length > 3) {
       try {
         const listPokemons: Pokemon[] = [];
-        const detailPokemon: DetailPokemon = (await this.apiPokemonServices
+        const detailPokemon: DetailPokemon = await this.apiPokemonServices
           .getPokemon(value.toLowerCase())
-          .toPromise()) as DetailPokemon;
+          .toPromise();
         const speciesPokemon: SpeciesPokemon = (await this.apiPokemonServices
           .getInfoPokemon(detailPokemon.species.url)
           .toPromise()) as SpeciesPokemon;
@@ -96,6 +101,7 @@ export class AppComponent implements OnInit {
       }
     }
     if (value.length === 0) this.searchPokemons();
+    this.loading = false;
   }
 
   paginationBack() {

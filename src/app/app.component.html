@@ -4,7 +4,10 @@
 <div class="main">
   <div class="list-pokemons">
     <search-input (searchChange)="searchPokemon($event)"></search-input>
-    <div *ngIf="pokemons.length > 0; else notItems" class="result">
+    <div class="custom-loader" *ngIf="loading">
+      <custom-loading [size]="16"></custom-loading>
+    </div>
+    <div *ngIf="pokemons.length > 0" class="result">
       <div
         class="card-result"
         *ngFor="let item of pokemons"
@@ -13,9 +16,9 @@
         <card-simple-pokemon [pokemon]="item"></card-simple-pokemon>
       </div>
     </div>
-    <ng-template #notItems>
+    <ng-container *ngIf="!loading && pokemons.length === 0">
       <h5>No se encuentran resultados</h5>
-    </ng-template>
+    </ng-container>
   </div>
   <div class="pokemon-detail">
     <card-detail-pokemon

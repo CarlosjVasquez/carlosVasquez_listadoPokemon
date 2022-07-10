@@ -9,6 +9,7 @@ import { CardSimplePokemonComponent } from './components/card-simple-pokemon/car
 import { HttpClientModule } from '@angular/common/http';
 import { CardDetailPokemonComponent } from './components/card-detail-pokemon/card-detail-pokemon.component';
 import { CardComponent } from './components/card/card.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CardComponent } from './components/card/card.component';
     CardSimplePokemonComponent,
     CardDetailPokemonComponent,
     CardComponent,
+    LoadingComponent,
   ],
   imports: [BrowserModule, HttpClientModule],
   providers: [],

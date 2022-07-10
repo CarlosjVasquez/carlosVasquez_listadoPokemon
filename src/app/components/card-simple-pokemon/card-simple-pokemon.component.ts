@@ -7,12 +7,9 @@ import { Pokemon } from 'src/app/model/pokemon';
   styleUrls: ['./card-simple-pokemon.component.sass'],
 })
 export class CardSimplePokemonComponent {
-  @Input() pokemon: Pokemon;
+  @Input() pokemon: Pokemon | null;
 
   constructor() {
-    this.pokemon = {
-      name: '',
-      url: '',
-    };
+    this.pokemon = null;
   }
 }

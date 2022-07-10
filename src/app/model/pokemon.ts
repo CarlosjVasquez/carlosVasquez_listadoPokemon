@@ -10,6 +10,12 @@ export interface SpeciesPokemon {
 type colorPokemon = {
   name: string;
 };
+export class DetailPokemon {
+  name: string;
+  constructor() {
+    this.name = '';
+  }
+}
 export interface DetailPokemon {
   name: string;
   id: number;

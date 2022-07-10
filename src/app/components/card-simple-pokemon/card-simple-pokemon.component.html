@@ -1,12 +1,12 @@
 <card
   class="card"
   [urlimg]="
-    pokemon.detailPokemon?.sprites?.other?.dream_world?.front_default || ''
+    pokemon?.detailPokemon?.sprites?.other?.dream_world?.front_default || ''
   "
-  [color]="pokemon.speciesPokemon?.color?.name || ''"
+  [color]="pokemon?.speciesPokemon?.color?.name || ''"
 >
   <div class="title" body>
-    <h5>#{{ pokemon.detailPokemon?.id }}</h5>
-    <h5>{{ pokemon.name | titlecase }}</h5>
+    <h5>#{{ pokemon?.detailPokemon?.id }}</h5>
+    <h5>{{ pokemon?.name | titlecase }}</h5>
   </div>
 </card>

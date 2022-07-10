@@ -7,7 +7,7 @@ import { Pokemon } from '../../model/pokemon';
   styleUrls: ['./card-detail-pokemon.component.sass'],
 })
 export class CardDetailPokemonComponent {
-  @Input() pokemon: any;
+  @Input() pokemon: Pokemon | null;
 
   constructor() {
     this.pokemon = null;
